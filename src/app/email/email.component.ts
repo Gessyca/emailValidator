@@ -9,6 +9,7 @@ import { FormControl, FormGroup, FormBuilder, Validators, AbstractControl, Valid
 export class EmailComponent implements OnInit {
 
   form: FormGroup;
+  emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
   constructor(private fb: FormBuilder) {
     this.createForm();
@@ -19,7 +20,7 @@ export class EmailComponent implements OnInit {
 
   createForm() {
     this.form = this.fb.group({
-      email: [null, Validators.compose([this.customEmailValidator])],
+      email: [null, Validators.pattern(this.emailPattern)],
     });
   }
 
@@ -27,7 +28,6 @@ export class EmailComponent implements OnInit {
     if (!control.value) {
       return null;
     }
-
     return Validators.email(control);
   }
   enviar(){
