@@ -1,0 +1,10 @@
+<form [formGroup]="form" autocomplete="off" onsubmit="enviar()">
+  EMAIL:
+  <input formControlName="email">
+  <p>Email: {{ form.get('email').value}}</p>
+  <p>Status formulario {{form.status}}</p>
+  <p *ngIf="form.get('email').value !=null && !form.get('email').valid">
+    Email inválido!
+  </p>
+  <button type="submit">ENVIAR</button>
+</form>
